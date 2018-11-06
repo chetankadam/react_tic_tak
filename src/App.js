@@ -8,6 +8,7 @@ class Square extends React.Component {
     super(props);
     this.state = {
       value: null,
+     
     };
   }
   render() {
@@ -26,15 +27,19 @@ class Board extends React.Component {
     super(props);
     this.state = {
       squares: Array(9).fill(null),
+      xIsNext: true
     };
   }
 
-  handleClick(i) {
-    
-    const squares = this.state.squares.splice();
-    squares[i] = 'X';
-    this.setState({squares: squares});
-    console.log("this--->",this);
+  handleClick(i) { 
+    const squares = this.state.squares.slice();
+    Console.log("this.state.xIsNext------>",this.state.xIsNext);
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      squares: squares,
+      xIsNext:!this.state.xIsNext
+    });
+    console.log("this--->",this,"squares--->",squares);
   }
   renderSquare(i) {
     return <Square value={this.state.squares[i]}
